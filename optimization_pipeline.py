@@ -237,6 +237,8 @@ class OptimizationPipeline:
         self.predictor.cur_instruct = self.cur_prompt
         logging.info('Running Predictor')
         records = self.predictor.apply(self.dataset, self.batch_id, leq=True)
+        #This is temporary
+        records['text'] = self.cur_prompt['prompt']
         self.dataset.update(records)
 
         self.eval.dataset = self.dataset.get_leq(self.batch_id)
